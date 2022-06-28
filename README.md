@@ -2,6 +2,17 @@
 
 Just a simple repo demonstrating running a rust package through Docker.
 
-cd hello_world
-docker build -t my-rust-app .
-docker run -it --rm --name my-running-app my-rust-app
+When developing, use the devcontainer for a reliable Rust environment. 
+
+The Dockerfile that comes with the src folder is currently configured to run `main.rs`.
+
+## Running code
+
+After starting the dev container (use Remote Containers plugin in VSCode):
+
+    cargo build
+    cargo run
+
+## Testing Code
+
+    cargo test
