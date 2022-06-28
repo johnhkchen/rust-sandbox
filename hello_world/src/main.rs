@@ -1,7 +1,7 @@
 fn gcd(mut a: u64, mut b: u64) -> u64 {
     assert!(a != 0 && b != 0);
     while b != 0 {
-        let t = b;
+        let t:u64 = b;
         b = a % b;
         a = t;
     }
