@@ -1,80 +1,61 @@
-fn gcd(mut a: u64, mut b: u64) -> u64 {
-    assert!(a != 0 && b != 0);
-    while b != 0 {
-        let t:u64 = b;
-        b = a % b;
-        a = t;
-    }
-    a
-}
+mod algorithms;
+mod helpers;
 
 fn greet() -> &'static str{
     "Hello, John"
 }
 
+fn reduce_fraction(a:u64, b:u64) -> String {
+    let d:u64 = algorithms::gcd(a, b);
+    format!("The reduced fraction is {}/{}", a/d, b/d)
+}
+
+fn instructions_for(name: &'static str) -> String {
+    helpers::recipe_instructions(name)
+}
+
 fn main() {
-    let greeting = greet();
-    println!("{}", greeting);
-    let a:u64 = 378;
-    let b:u64 = 868;
-    println!("I will reduce the fraction {}/{} to lowest terms.", a, b);
-    let d:u64 = gcd(a, b);
-    println!("The GCD is {}", d);
-    println!("The reduced fraction is {}/{}", a/d, b/d)
+    println!("{}", greet());
+    println!("{}", reduce_fraction(378, 868));
+    println!("{}", instructions_for("cake"));
+    println!("{}", instructions_for("dropper"));
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::greet;
+    use crate::reduce_fraction;
+    use crate::instructions_for;
+
     #[test]
-    fn it_has_a_greeting() {
-        use crate::greet;
-        assert_eq!( greet(), "Hello, John");
+    fn it_greets() {
+        assert_eq!(
+            "Hello, John",
+            greet()
+        );
     }
 
     #[test]
-    fn it_can_do_euclids_algorithm_simple() {
-        use crate::gcd;
-
-        assert_eq!(gcd(15, 9), 3);
-        assert_eq!(gcd(10, 12), 2);
-        assert_eq!(gcd(10, 13), 1);
-        assert_eq!(gcd(20, 40), 20);
-        assert_eq!(gcd(24, 24), 24);
-        assert_eq!(gcd(24, 8), 8);
+    fn it_reduces_fractions() {
+        assert_eq!(
+            "The reduced fraction is 1/9",
+            reduce_fraction(11, 99)
+        );
+    }
+    
+    #[test]
+    fn it_creates_cake_instructions() {
+        assert_eq!(
+            "It takes 3 wheat, 1 egg, 3 milk, and 2 sugars to craft cake",
+            instructions_for("cake")
+        );
     }
 
     #[test]
-    fn it_can_do_euclids_algorithm_moderate() {
-        use crate::gcd;
-
-        assert_eq!(gcd(10, 31), 1);
-        assert_eq!(gcd(20, 24), 4);
-        assert_eq!(gcd(40, 96), 8);
-        assert_eq!(gcd(48, 12), 12);
-        assert_eq!(gcd(12, 24), 12);
-        assert_eq!(gcd(24, 64), 8);
+    fn it_creates_dropper_instructions() {
+        assert_eq!(
+            "It takes 8 cobblestone and 1 redstone to craft dropper",
+            instructions_for("dropper")
+        );
     }
-
-    #[test]
-    fn it_can_do_euclids_algorithm_hard() {
-        use crate::gcd;
-
-        assert_eq!(gcd(11571, 1767), 57);
-        assert_eq!(gcd(69119, 19440), 1);
-    }
-
-    #[test]
-    fn it_can_help_reduce_fractions() {
-        use crate::gcd;
-
-        assert_eq!(gcd(861, 984), 123);
-        assert_eq!(861/984, 7/8);
-
-        assert_eq!(gcd(132, 924), 132);
-        assert_eq!(132/924, 1/7);
-
-        assert_eq!(gcd(378, 868), 14);
-        assert_eq!(378/868, 27/62);
-    }
-
 }
