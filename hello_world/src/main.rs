@@ -28,13 +28,13 @@ mod tests {
     #[test]
     fn it_has_a_greeting() {
         use crate::greet;
-        let greeting = greet();
-        assert_eq!(greeting, "Hello, John");
+        assert_eq!( greet(), "Hello, John");
     }
 
     #[test]
     fn it_can_do_euclids_algorithm_simple() {
         use crate::gcd;
+
         assert_eq!(gcd(15, 9), 3);
         assert_eq!(gcd(10, 12), 2);
         assert_eq!(gcd(10, 13), 1);
@@ -46,6 +46,7 @@ mod tests {
     #[test]
     fn it_can_do_euclids_algorithm_moderate() {
         use crate::gcd;
+
         assert_eq!(gcd(10, 31), 1);
         assert_eq!(gcd(20, 24), 4);
         assert_eq!(gcd(40, 96), 8);
@@ -57,6 +58,7 @@ mod tests {
     #[test]
     fn it_can_do_euclids_algorithm_hard() {
         use crate::gcd;
+
         assert_eq!(gcd(11571, 1767), 57);
         assert_eq!(gcd(69119, 19440), 1);
     }
@@ -64,23 +66,15 @@ mod tests {
     #[test]
     fn it_can_help_reduce_fractions() {
         use crate::gcd;
-        let mut a:u64 = 861;
-        let mut b:u64 = 984;
-        let mut d:u64 = gcd(a, b);
-        assert_eq!(d, 123);
-        assert_eq!(a/b, 7/8);
 
-        a = 132;
-        b = 924;
-        d = gcd(a, b);
-        assert_eq!(d, 132);
-        assert_eq!(a/b, 1/7);
+        assert_eq!(gcd(861, 984), 123);
+        assert_eq!(861/984, 7/8);
 
-        a = 378;
-        b = 868;
-        d = gcd(a, b);
-        assert_eq!(d, 14);
-        assert_eq!(a/b, 27/62);
+        assert_eq!(gcd(132, 924), 132);
+        assert_eq!(132/924, 1/7);
+
+        assert_eq!(gcd(378, 868), 14);
+        assert_eq!(378/868, 27/62);
     }
 
 }
