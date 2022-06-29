@@ -8,8 +8,9 @@ fn hamcraft(recipe_name: &str) -> String {
 }
 
 fn main() {
-    // print tutorial if no args
-    if env::args().len() == 1 {
+    let args = env::args().skip(1);
+    
+    if args.len() == 0 {
         println!("What recipe do you want?");
         return
     }
